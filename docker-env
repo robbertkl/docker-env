@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+MACHINE="$(basename ${0})"
+if [ -n "${1}" ]; then
+	MACHINE="${1}"
+fi
+
+ENV="$(docker-machine env ${MACHINE})"
+if [ $? -ne 0 ]
+then
+	exit 1
+fi
+
+clear
+
+CHECK_PROFILE=$(osascript -e 'tell application "Terminal" to get settings sets whose name is "'${MACHINE}'"')
+if [ -n "${CHECK_PROFILE}" ]
+then
+	CURRENT_PROFILE=$(osascript -e 'tell front window of application "Terminal" to get name of current settings of selected tab')
+	osascript -e 'tell application "Terminal" to set current settings of front window to settings set "'${MACHINE}'"'
+fi
+
+eval "${ENV}"
+${SHELL} -l
+clear
+
+if [ -n "${CHECK_PROFILE}" ]
+then
+	osascript -e 'tell application "Terminal" to set current settings of front window to settings set "'${CURRENT_PROFILE}'"'
+fi
