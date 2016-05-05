@@ -11,6 +11,8 @@ then
 	exit 1
 fi
 
+DOCKER_VERSION=$(docker-machine ls --filter name="${MACHINE}" --format "{{.DockerVersion}}" | sed s/^v//)
+
 clear
 
 CHECK_PROFILE=$(osascript -e 'tell application "Terminal" to get settings sets whose name is "'${MACHINE}'"')
@@ -21,6 +23,7 @@ then
 fi
 
 eval "${ENV}"
+export DOCKER_VERSION
 ${SHELL} -l
 clear
 

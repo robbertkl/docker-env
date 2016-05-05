@@ -34,6 +34,20 @@ or, if you created the shortcut symlinks, just use the machine name:
 dev
 ```
 
+### Docker Version Manager
+
+For those who are using [Docker Version Manager](https://github.com/getcarina/dvm), docker-env sets the `DOCKER_VERSION` environment variable to the version your docker machine is using.
+This allows you to automatically switch to a compatible docker client by adding this to your `~/.profile` or other startup script:
+
+```
+if [ -n "${DOCKER_VERSION}" ]
+then
+  dvm use
+fi
+```
+
+Make sure you insert this AFTER your `source ~/.dvm/dvm.sh` line.
+
 ## Authors
 
 * Robbert Klarenbeek, <robbertkl@renbeek.nl>
