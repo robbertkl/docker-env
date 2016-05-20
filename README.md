@@ -48,6 +48,10 @@ fi
 
 Make sure you insert this AFTER your `source ~/.dvm/dvm.sh` line.
 
+### Docker for Mac
+
+Support for Docker for Mac has been added by allowing any name (a non-existent docker machine), which will clear the docker environment variables.
+
 ## Authors
 
 * Robbert Klarenbeek, <robbertkl@renbeek.nl>

@@ -6,12 +6,17 @@ if [ -n "${1}" ]; then
 fi
 
 ENV="$(docker-machine env "${MACHINE}")"
-if [ $? -ne 0 ]
+if [ ${?} -eq 0 ]
 then
-	exit 1
+	eval "${ENV}"
+	export DOCKER_VERSION=$(docker-machine version "${MACHINE}")
+else
+	export DOCKER_TLS_VERIFY=
+	export DOCKER_HOST=
+	export DOCKER_CERT_PATH=
+	export DOCKER_MACHINE_NAME=
+	export DOCKER_VERSION="system"
 fi
-
-DOCKER_VERSION=$(docker-machine version "${MACHINE}")
 
 clear
 
@@ -22,8 +27,6 @@ then
 	osascript -e 'tell application "Terminal" to set current settings of front window to settings set "'${MACHINE}'"'
 fi
 
-eval "${ENV}"
-export DOCKER_VERSION
 ${SHELL} -l
 clear
 
