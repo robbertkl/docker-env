@@ -5,13 +5,13 @@ if [ -n "${1}" ]; then
 	MACHINE="${1}"
 fi
 
-ENV="$(docker-machine env ${MACHINE})"
+ENV="$(docker-machine env "${MACHINE}")"
 if [ $? -ne 0 ]
 then
 	exit 1
 fi
 
-DOCKER_VERSION=$(docker-machine ls --filter name="${MACHINE}" --format "{{.DockerVersion}}" | sed s/^v//)
+DOCKER_VERSION=$(docker-machine version "${MACHINE}")
 
 clear
 
