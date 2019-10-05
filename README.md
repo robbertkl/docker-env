@@ -2,6 +2,8 @@
 
 OS X wrapper script for `docker-machine env`, creating colored Terminal sessions for different docker machines.
 
+If you use docker contexts instead of docker-machine, please see [docker-context](https://github.com/robbertkl/docker-context`).
+
 ## Installation
 
 * Install the [docker-env](docker-env) script to any `bin/` directory in your `$PATH`, for example:
